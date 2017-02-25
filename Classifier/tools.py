@@ -1,11 +1,12 @@
-import tensorflow as tf, sys
+import tensorflow as tf
 
-image_path = sys.argv[1]
+#image_path = sys.argv[1]
 
 # Read in the image_data
-image_data = tf.gfile.FastGFile(image_path, 'rb').read()
+#image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
-def classify():
+def classify(image_path):
+    image_data = tf.gfile.FastGFile(image_path, 'rb').read()
     # Loads label file, strips off carriage return
     label_lines = [line.rstrip() for line in tf.gfile.GFile("retrained_labels.txt")]
 
@@ -24,12 +25,12 @@ def classify():
         # Sort to show labels of first prediction in order of confidence
         top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
         best = top_k[0]
-        print(top_k)
+        #print(top_k)
         #print(type(predictions))
         #best = predictions[0].argsort()[-1][::-1]
-        print (best)
+        #print (best)
         label = label_lines[best]
-        certainty = prediction[0][best]
+        #certainty = predictions[0][best]
         
         '''
         for node_id in top_k:
@@ -38,4 +39,4 @@ def classify():
             print('%s (score = %.5f)' % (human_string, score))
         '''
     
-        return label,certainty
+        return label
