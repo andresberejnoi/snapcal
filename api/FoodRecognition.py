@@ -1,9 +1,12 @@
 import tensorflow as tf, sys
+from util import load_config
 
 class FoodRecognition:
 	
-	def __init__(self):
+	def __init__(self, cfg):
 		self.image_path = None
+		self.retrained_labels = cfg["FoodRec"]["labels"]
+		self.retrained_graph = cfg["FoodRec"]["graph"]
 		self.label_lines = self.read_labels()
 	
 	def set_image_path(self, image_path):
@@ -16,7 +19,7 @@ class FoodRecognition:
 	
 	def read_labels(self):
 		# Loads label file, strips off carriage return
-		label_lines = [line.rstrip() for line in tf.gfile.GFile("retrained_labels.txt")]
+		label_lines = [line.rstrip() for line in tf.gfile.GFile(self.retrained_labels)]
 		return label_lines
 	
 	def print_rank(prediction):
@@ -27,7 +30,7 @@ class FoodRecognition:
 
 	def predict(self):
 		# Unpersists graph from file
-		with tf.gfile.FastGFile("retrained_graph.pb", 'rb') as f:
+		with tf.gfile.FastGFile(self.retrained_graph, 'rb') as f:
 			graph_def = tf.GraphDef()
 			graph_def.ParseFromString(f.read())
 			_ = tf.import_graph_def(graph_def, name='')
@@ -48,7 +51,8 @@ class FoodRecognition:
     
 
 if __name__ == "__main__":
-	imgRec=FoodRecognition()
+	cfg = load_config()
+	imgRec=FoodRecognition(cfg)
 	imgRec.set_image_path("brocolli.jpg")
 	print	imgRec.predict()
 	
