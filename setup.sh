@@ -31,6 +31,7 @@ pip install numpy
 pip install Cython==0.23
 pip install kivy
 pip install pygame
+pip install tensorflow
 
 # To deactivate the venv, use
 #

@@ -1,55 +1,77 @@
-__version__ = '1.0'
+'''
+Basic camera example
+Default picture is saved as
+/sdcard/org.test.cameraexample/enter_file_name_here.jpg
+'''
+
+from os import getcwd
+from os.path import exists
+from os.path import splitext
 
 import kivy
-
-# importing file from https://github.com/kivy/plyer/blob/master/plyer/platforms/android/camera.py
-# I downloaded it and saved it in the same directory:
-from camera import AndroidCamera
+kivy.require('1.8.0')
 
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
+from kivy.logger import Logger
 
-import base64
+from plyer import camera
 
-class MyCamera(AndroidCamera):
-    pass
 
-class BoxLayoutW(BoxLayout):
-    my_camera = ObjectProperty(None)
-    # /sdcard means internal mobile storage for that case:
-    image_path = StringProperty('/sdcard/my_test_photo.png')
+class CameraDemo(FloatLayout):
+    def __init__(self):
+        super(CameraDemo, self).__init__()
+        self.cwd = getcwd() + "/"
+        self.ids.path_label.text = self.cwd
 
-    def __init__(self, **kwargs):
+    def do_capture(self):
+        filepath = self.cwd + self.ids.filename_text.text
+        ext = splitext(filepath)[-1].lower()
 
-        super(BoxLayoutW, self).__init__()
+        if(exists(filepath)):
+            popup = MsgPopup("Picture with this name already exists!")
+            popup.open()
+            return False
 
-        self.my_camera = MyCamera()
+        try:
+            camera.take_picture(filename=filepath,
+                                on_complete=self.camera_callback)
+        except NotImplementedError:
+            popup = MsgPopup(
+                "This feature has not yet been implemented for this platform.")
+            popup.open()
 
-    def take_shot(self):
-        self.my_camera._take_picture(self.on_success_shot, self.image_path)
+    def camera_callback(self, filepath):
+        if(exists(filepath)):
+            popup = MsgPopup("Picture saved!")
+            popup.open()
+        else:
+            popup = MsgPopup("Could not save your picture!")
+            popup.open()
 
-    def on_success_shot(self, loaded_image_path):
-        # converting saved image to a base64 string:
-        image_str = self.image_convert_base64
+
+class CameraDemoApp(App):
+    def __init__(self):
+        super(CameraDemoApp, self).__init__()
+        self.demo = None
+
+    def build(self):
+        self.demo = CameraDemo()
+        return self.demo
+
+    def on_pause(self):
         return True
 
-    #converting image to a base64, if you want to send it, for example, via POST:
-    def image_convert_base64(self):
-        with open(self.image_path, "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
-        if not encoded_string:
-            encoded_string = ''
-        return encoded_string
+    def on_resume(self):
+        pass
+
+
+class MsgPopup(Popup):
+    def __init__(self, msg):
+        super(MsgPopup, self).__init__()
+        self.ids.message_label.text = msg
 
 if __name__ == '__main__':
-
-    class CameraApp(App):
-        def build(self):
-            main_window = BoxLayoutW()
-            return main_window
-
-    CameraApp().run()
-
-
+    CameraDemoApp().run()
