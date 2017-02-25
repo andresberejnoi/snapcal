@@ -1,6 +1,22 @@
 # Source this.
 # Setup virtualenv
-mkdir -p data
+
+sudo apt-get install -y \
+    python-pip \
+    build-essential \
+    git \
+    python \
+    python-dev \
+    ffmpeg \
+    libsdl2-dev \
+    libsdl2-image-dev \
+    libsdl2-mixer-dev \
+    libsdl2-ttf-dev \
+    libportmidi-dev \
+    libswscale-dev \
+    libavformat-dev \
+    libavcodec-dev \
+    zlib1g-dev
 
 if [ ! -d venv ]
 then
@@ -11,6 +27,10 @@ fi
 
 pip install pyyaml
 pip install requests
+pip install numpy
+pip install Cython==0.23
+pip install kivy
+pip install pygame
 
 # To deactivate the venv, use
 #
