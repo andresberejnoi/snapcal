@@ -6,17 +6,10 @@ sudo apt-get install -y \
     build-essential \
     git \
     python \
-    python-dev \
-    ffmpeg \
-    libsdl2-dev \
-    libsdl2-image-dev \
-    libsdl2-mixer-dev \
-    libsdl2-ttf-dev \
-    libportmidi-dev \
-    libswscale-dev \
-    libavformat-dev \
-    libavcodec-dev \
-    zlib1g-dev
+    python-dev
+
+sudo pip install --upgrade pip 
+sudo pip install --upgrade virtualenv 
 
 if [ ! -d venv ]
 then
@@ -28,10 +21,7 @@ fi
 pip install pyyaml
 pip install requests
 pip install numpy
-pip install Cython==0.23
-pip install kivy
-pip install pygame
-pip install tensorflow
+pip install --upgrade tensorflow
 
 # To deactivate the venv, use
 #
