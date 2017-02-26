@@ -1,7 +1,7 @@
 import yaml
 
-def load_config():
-	with open("../config.yml", 'r') as ymlfile:
+def load_config(file):
+	with open(file, 'r') as ymlfile:
 		cfg = yaml.load(ymlfile)
 	return cfg
 

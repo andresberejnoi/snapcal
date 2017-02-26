@@ -1,0 +1,12 @@
+.collection {
+    overflow: inherit;
+}
+.left-align {
+    float: left;
+}
+.btn-floating.btn-large.redo {
+    bottom: 20px;
+    text-align: center;
+    left: 20px;
+    position: fixed;
+}

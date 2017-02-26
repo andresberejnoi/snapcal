@@ -30,7 +30,7 @@ class FoodRecognition():
                         assert(mode==1 or mode==0)
                         self.FILTER_MODE = mode
                 
-        def print_rank(predictions):
+        def print_rank(self, predictions):
                 for node_id in predictions:
                         human_string = self.label_lines[node_id]
                         score = predictions[0][node_id]

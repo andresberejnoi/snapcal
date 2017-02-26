@@ -20,16 +20,16 @@ class CalorieCal:
 		self.headers['x-remote-user-id'] = "0"
 
 	def get_cal(self, query):
-                """
-                Given a query returns a float of calories for that item
-                """
-                endpoint = "natural/nutrients"
-                url = self.build_url(endpoint)
-                self.auth_headers()
-                body = {"query": query, "timezone": "US/Eastern"}
-                result_query = requests.post(url, data=json.dumps(body), headers=self.headers)
-                #print (result_query)
-                return float(result_query.json()["foods"][0]["nf_calories"])
+        """
+        Given a query returns a float of calories for that item
+        """
+        endpoint = "natural/nutrients"
+        url = self.build_url(endpoint)
+        self.auth_headers()
+        body = {"query": query, "timezone": "US/Eastern"}
+        result_query = requests.post(url, data=json.dumps(body), headers=self.headers)
+        #print (result_query)
+        return float(result_query.json()["foods"][0]["nf_calories"])
 
 
 if __name__ == "__main__":
