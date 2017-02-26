@@ -3,6 +3,10 @@
 }
 .left-align {
     float: left;
+    text-transform: capitalize;
+}
+.total {
+    font-weight: bold;
 }
 .btn-floating.btn-large.redo {
     bottom: 20px;

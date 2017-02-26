@@ -1,5 +1,5 @@
 from everything import *
-import time
+from classify import run
 
 def allowed_file(filename):
   return '.' in filename and \
@@ -11,10 +11,10 @@ def profile():
     file = request.files['file']
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      print("here")
-      data = {"pizza": "500", "brocolli":"50"}
-      #return "worked"
+      image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+      file.save(image_path)
+      data = run(image_path, cfg)
+      os.remove(image_path)
       return render_template("display.html", data=data)
     return "did not work"
   return render_template ("upload.html")

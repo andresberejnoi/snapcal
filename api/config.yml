@@ -5,7 +5,7 @@ nutritionix:
   version: "v2"
 
 FoodRec:
-  labels: "../data/retrained_labels.txt"
-  graph: "../data/retrained_graph.pb"
+  labels: "data/retrained_labels.txt"
+  graph: "data/retrained_graph.pb"
 
 tag: "snapcal"
