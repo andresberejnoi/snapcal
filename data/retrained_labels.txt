@@ -1,6 +1,8 @@
-steak
-cheeseburger
-table surface
 rice
+chips
+cheeseburger
+orange
+steak
+bottled water
 broccoli
 pizza
