@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% set currentPage = "checks" %}
+{% block body %}
+{% include "navbar.html" %}
+ <ul class="collection with-header">
+  <li class="collection-item"><div>A1c<a href="#!" class="secondary-content"><input type="checkbox" name="1" id="test1" /><label for="test1"></label></a></div></li>
+  <li class="collection-item"><div>Flu Shot<a href="#!" class="secondary-content"><input type="checkbox" name="2" id="test2" checked/><label for="test1"></label></a></div></li>
+  <li class="collection-item"><div>Pneumonia Shot<a href="#!" class="secondary-content"><input type="checkbox" name="3" id="test3" checked/><label for="test1"></label></a></div></li>
+  <li class="collection-item"><div>Physical<a href="#!" class="secondary-content"><input type="checkbox" name="4" id="test4" checked/><label for="test1"></label></a></div></li>
+</ul>
+<div class="center-btn">
+<a class="waves-effect waves-light btn"><i class="material-icons left">card_giftcard</i>Claim Your Bonus</a> 
+</div>
+
+{% endblock %}

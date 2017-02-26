@@ -1,0 +1,19 @@
+body {
+    background-color: #004d40;
+}
+.center-container{
+    bottom: 0;
+    position: absolute;
+    display: table;
+    width: 100%;   
+}
+.center-container .register, .login{
+    display: table-row;
+    text-align: center;
+    height: 40px;
+}
+.center-img {
+    text-align: center;
+    position: relative;
+    margin-top: 50px;
+}

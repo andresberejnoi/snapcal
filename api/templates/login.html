@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% set currentPage = "login" %}
+{% block body %}
+<div class="row">
+  <div class="input-field col s6">
+    <input id="password" type="password" class="validate">
+    <label for="password">PIN</label>
+  </div>
+</div>
+<div class="row">
+  <a class="waves-effect waves-light btn" href="/profile">Login</a>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+.row {
+  margin-bottom: 0;
+}
+.title {
+  font-weight: bold;
+}
+.card-panel {
+  display: flex;
+  position: relative;
+}
+.card-left {
+  display: inline-block;
+  top: 10px;
+  position: relative;
+}
+.card-right {
+  display: inline-block;
+  right: 2rem;
+  bottom: 10px;
+  position: absolute;
+}
+.btn-floating.btn-large {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+.card-panel.center {
+  display: block;
+}
+.card-panel i {
+  color: grey;
+}
+.card-panel.red{
+  text-align: center;
+  display: block;
+}
+.card-panel span {
+  font-size: 18px;
+  color: white;
+}

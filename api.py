@@ -16,7 +16,6 @@ else:
 
 if os.getenv('PORT'):
   PORT = int(os.getenv('PORT'))
-  PORT = 8081
 else:
   PORT = 8080
 
