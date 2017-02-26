@@ -47,7 +47,17 @@ class FoodRecognition:
 		#certainty = predictions[0][top_k[0]]
 		
 		return label
-    
+        def predict_multilabel(self):
+                '''Placeholder. It should find several types of objects present in one image'''
+                with tf.gfile.FastGFile(self.retrained_graph, 'rb') as f:
+                        graph_def = tf.GraphDef()
+                        graph_def.ParserFromString(f.read())
+                        _ = tf.import_graph_def(graph_def, name = '')
+                
+                pass
+                pass
+                labels = None
+                return labels 
 
 if __name__ == "__main__":
 	cfg = load_config()
