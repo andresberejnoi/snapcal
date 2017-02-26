@@ -8,13 +8,13 @@ class FoodRecognition:
 		self.retrained_labels = cfg["FoodRec"]["labels"]
 		self.retrained_graph = cfg["FoodRec"]["graph"]
 		self.label_lines = self.read_labels()
-	
+	"""
 	def set_image_path(self, image_path):
 		self.image_path = image_path
-
-	def read_image(self):
+        """
+	def read_image(self,image_path):
 		# Read in the image_data
-		image_data = tf.gfile.FastGFile(self.image_path, 'rb').read()
+		image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 		return image_data
 	
 	def read_labels(self):
@@ -22,8 +22,8 @@ class FoodRecognition:
 		label_lines = [line.rstrip() for line in tf.gfile.GFile(self.retrained_labels)]
 		return label_lines
 	
-	def print_rank(prediction):
-		for node_id in prediction:
+	def print_rank(predictions):
+		for node_id in predictions:
 			human_string = self.label_lines[node_id]
 			score = predictions[0][node_id]
 			print('%s (score = %.5f)' % (human_string, score))
@@ -38,8 +38,7 @@ class FoodRecognition:
 			# Feed the image_data as input to the graph and get first prediction
 			softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
 
-			predictions = sess.run(softmax_tensor, \
-      	{'DecodeJpeg/contents:0': self.read_image()})
+			predictions = sess.run(softmax_tensor, {'DecodeJpeg/contents:0': self.read_image()})
 			
 			# Sort to show labels of first prediction in order of confidence
 			top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
