@@ -18,12 +18,12 @@ class FoodRecognition:
 		return image_data
 	
 	def read_labels(self):
-		# Loads label file, strips off carriage return
+		# Loads label file, strips off carriage return
 		label_lines = [line.rstrip() for line in tf.gfile.GFile(self.retrained_labels)]
 		return label_lines
 	
-	def print_rank(prediction):
-		for node_id in prediction:
+	def print_rank(self, predictions):
+		for node_id in predictions:
 			human_string = self.label_lines[node_id]
 			score = predictions[0][node_id]
 			print('%s (score = %.5f)' % (human_string, score))
@@ -38,8 +38,7 @@ class FoodRecognition:
 			# Feed the image_data as input to the graph and get first prediction
 			softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
 
-			predictions = sess.run(softmax_tensor, \
-      	{'DecodeJpeg/contents:0': self.read_image()})
+			predictions = sess.run(softmax_tensor, {'DecodeJpeg/contents:0': self.read_image()})
 			
 			# Sort to show labels of first prediction in order of confidence
 			top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
@@ -51,7 +50,7 @@ class FoodRecognition:
     
 
 if __name__ == "__main__":
-	cfg = load_config()
+	cfg = load_config("config.yml")
 	imgRec=FoodRecognition(cfg)
 	imgRec.set_image_path("brocolli.jpg")
 	print	imgRec.predict()
