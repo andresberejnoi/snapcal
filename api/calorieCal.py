@@ -1,5 +1,6 @@
 import requests
 import json
+import pprint
 from util import load_config
 
 class CalorieCal:
@@ -19,24 +20,19 @@ class CalorieCal:
 		self.headers['x-remote-user-id'] = "0"
 
 	def get_cal(self, query):
-                """ given a query returns an array of food dictionaries
-                return: [
-                               {
-                                                                "food_name":
-								"food_cal":
-							}
-						]
+                """
+                Given a query returns a float of calories for that item
                 """
                 endpoint = "natural/nutrients"
                 url = self.build_url(endpoint)
                 self.auth_headers()
                 body = {"query": query, "timezone": "US/Eastern"}
-                result_query = requests.post(url, data=json.dumps(body), headers=self.headers).text
-                print (result_query)
-                return result_query
+                result_query = requests.post(url, data=json.dumps(body), headers=self.headers)
+                #print (result_query)
+                return float(result_query.json()["foods"][0]["nf_calories"])
 
 
 if __name__ == "__main__":
-	cfg = load_config()
+	cfg = load_config("config.yml")
 	CC = CalorieCal(cfg)
-	CC.get_cal("1 Veggie Burger")
+	print (CC.get_cal("1 Veggie Burger"))
