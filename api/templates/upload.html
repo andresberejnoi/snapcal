@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set currentPage = "upload" %}
+{% block body %}
+{% include "navbar.html" %}
+<div id="form">
+<form action="/upload" method=post enctype=multipart/form-data id="upload-form">
+  <div class="img-container">
+    <img id="image" class="resize-img" src="#" alt="your image" />
+  </div>
+  <div id="upload-box" class="image-upload">
+    <label for="file-input">
+        <div class="upload-icon">
+        <i class="material-icons">photo_camera</i>
+        <div class="upload-text">Snap Your Food</div>
+        </div>
+    </label>
+    <input id="file-input" type="file" name="file"/>
+  </div>
+</form>
+<button type=submit
+        id = "search"
+        form="upload-form"
+        class="btn-floating btn-large waves-effect waves-light teal search"
+        onclick = "submitData();"
+        ><i class="material-icons">search</i></button>
+<a class="btn-floating btn-small waves-effect waves-light teal redo" href="/upload"><i class="material-icons">undo</i></a>
+</div>
+
+<div id="loader" class="loader-container">
+  <div class="preloader-wrapper big active">
+  <div class="spinner-layer spinner-blue-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div>
+<div class="loader-text">Analyzing....</div>
+</div>
+{% endblock %}

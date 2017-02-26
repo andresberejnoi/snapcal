@@ -1,3 +1,5 @@
 from everything import *
 
-from globalroutes import *
+import api.start
+import api.upload
+import api.display

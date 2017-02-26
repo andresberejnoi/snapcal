@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% set currentPage = "display" %}
+{% block body %}
+{% include "navbar.html" %}
+<ul class="collection">
+  {% for key, value in data.iteritems() %}
+  <li class="collection-item"><div class="left-align">{{key}}</div><div class="right-align">{{value}} Cal</div></li>
+  {% endfor %}
+</ul>
+<a class="btn-floating btn-large waves-effect waves-light teal redo" href="/upload"><i class="material-icons">undo</i></a>
+{% endblock %}
