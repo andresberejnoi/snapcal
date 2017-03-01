@@ -1,6 +1,15 @@
 # Source this.
 # Setup virtualenv
-mkdir -p data
+
+sudo apt-get install -y \
+    python-pip \
+    build-essential \
+    git \
+    python \
+    python-dev
+
+sudo pip install --upgrade pip 
+sudo pip install --upgrade virtualenv 
 
 if [ ! -d venv ]
 then
@@ -9,8 +18,11 @@ fi
 
 . venv/bin/activate
 
+pip install flask
 pip install pyyaml
 pip install requests
+pip install numpy
+pip install --upgrade tensorflow
 
 # To deactivate the venv, use
 #
